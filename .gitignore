@@ -1,0 +1,15 @@
+# IDE
+.vscode
+
+# Environment
+.venv/
+.env
+
+# Database
+qdrant_storage/
+
+# Python
+__pycache__
+
+# OS
+.DS_Store
