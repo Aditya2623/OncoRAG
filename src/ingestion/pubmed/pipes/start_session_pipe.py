@@ -1,5 +1,4 @@
 from src.ingestion.base_pipe import BasePipe
-from src.ingestion.pubmed.tasks import fetch_task
 from src.pubmed.client import PubmedClient
 
 ONCOLOGY_QUERY = (
@@ -20,7 +19,9 @@ class StartSessionPipe(BasePipe):
         return "start_session_pipe"
 
     def run(self):
-        session = self.client.search(term=ONCOLOGY_QUERY)
+        from src.ingestion.pubmed.tasks import fetch_task
+
+        session = self.client.search(term=ONCOLOGY_QUERY, retmax=500)
 
         # Call next task
         fetch_task.delay(session.model_dump())

@@ -46,7 +46,7 @@ class PubmedClient:
 
     def __init__(
         self,
-        email: Optional[str],
+        email: Optional[str] = None,
         api_key: Optional[str] = None,
     ):
         """
@@ -192,7 +192,8 @@ class PubmedClient:
         try:
 
             handle = Entrez.efetch(**kwargs)
-            yield from Entrez.parse(handle)
+
+            return Entrez.read(handle)
 
         except RuntimeError as exc:
             raise RuntimeError(

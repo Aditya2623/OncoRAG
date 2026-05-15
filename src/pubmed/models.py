@@ -1,14 +1,6 @@
-from pydantic import BaseModel
 from typing import Optional
 
-
-class AbstractSection(BaseModel):
-    label: str | None = None
-    text: str
-
-
-class Abstract(BaseModel):
-    sections: list[AbstractSection] = []
+from pydantic import BaseModel
 
 
 class PubMedSearchSession(BaseModel):
@@ -27,12 +19,12 @@ class PubMedSearchSession(BaseModel):
     year: int | None = None
 
 
-class PubMedFetchArticle(BaseModel):
+class PubMedArticle(BaseModel):
     pmid: str
 
     title: str
 
-    abstract: Optional[Abstract] = None
+    abstract: str | None = None
 
     publication_year: int | None = None
 
